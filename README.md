@@ -6,17 +6,6 @@ A living wall of Midjourney art for your Mac. Midjourney Mosaic fits portraits, 
 
 [Download the latest release](https://github.com/zats/midjourney-mosaic/releases/latest)
 
-## What it does
-
-- Fills any display without empty bands, fixed rows, or a landscape-only bias.
-- Keeps a varied mix of portrait, square, and landscape artwork on screen.
-- Flips individual tiles with a 3D, Cover Flow-inspired transition.
-- Lets you choose between 6 and 96 visible images and a 0–5 second pause.
-- Caches successful image downloads for 24 hours and keeps stale copies available when the network is unavailable.
-- Includes a focus-safe preview app for tuning the composition before using the screen saver.
-
-The bundled feed is a 150-image snapshot collected from Midjourney Explore's public **Top** gallery. Images are fetched from Midjourney's 640 px CDN renditions; no Midjourney account is required by the screen saver.
-
 ## Install
 
 1. Download `Midjourney-Mosaic-v0.1.0.zip` from the [latest release](https://github.com/zats/midjourney-mosaic/releases/latest).
