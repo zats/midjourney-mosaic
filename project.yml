@@ -1,0 +1,93 @@
+name: MidjourneyMosaic
+options:
+  bundleIdPrefix: com.zats.screensavers
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    CODE_SIGNING_ALLOWED: NO
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 0.1.0
+    GENERATE_INFOPLIST_FILE: NO
+targets:
+  MidjourneyMosaic:
+    type: application
+    platform: macOS
+    sources:
+      - path: MidjourneyMosaic
+        excludes:
+          - Resources
+      - path: MidjourneyMosaic/Resources/explore-top.txt
+        buildPhase: resources
+    info:
+      path: MidjourneyMosaic/Info.plist
+      properties:
+        CFBundleDisplayName: Midjourney Mosaic
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSUIElement: true
+        NSHighResolutionCapable: true
+        NSPrincipalClass: NSApplication
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zats.screensavers.midjourney-mosaic
+        PRODUCT_NAME: MidjourneyMosaic
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.entertainment
+  MidjourneyScreenSaver:
+    type: bundle
+    platform: macOS
+    sources:
+      - path: MidjourneyMosaic/Model
+      - path: MidjourneyMosaic/Rendering
+      - path: MidjourneyScreenSaver
+        excludes:
+          - Info.plist
+      - path: MidjourneyMosaic/Resources/explore-top.txt
+        buildPhase: resources
+    dependencies:
+      - sdk: ScreenSaver.framework
+    info:
+      path: MidjourneyScreenSaver/Info.plist
+      properties:
+        CFBundleDisplayName: Midjourney Mosaic
+        CFBundleExecutable: $(EXECUTABLE_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSHighResolutionCapable: true
+        NSPrincipalClass: MidjourneyScreenSaverView
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zats.screensavers.midjourney-mosaic.saver
+        PRODUCT_NAME: Midjourney Mosaic
+        WRAPPER_EXTENSION: saver
+        MACH_O_TYPE: mh_bundle
+        SKIP_INSTALL: YES
+  MidjourneyMosaicTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: MidjourneyMosaicTests
+    dependencies:
+      - target: MidjourneyMosaic
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.zats.screensavers.midjourney-mosaic-tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  MidjourneyMosaic:
+    build:
+      targets:
+        MidjourneyMosaic: all
+        MidjourneyMosaicTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - MidjourneyMosaicTests
+  MidjourneyScreenSaver:
+    build:
+      targets:
+        MidjourneyScreenSaver: all
